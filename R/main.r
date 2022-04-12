@@ -20,6 +20,7 @@ if (any(installed_libs == F)) {
 # load libraries
 invisible(lapply(libs, library, character.only = T))
 library(here)
+library(tictoc)
 
 # 1. GET RIVERS DATA
 #---------
@@ -45,14 +46,15 @@ library(here)
 get_data <- function(url, res, filenames) {
   # unzip("HydroRIVERS_v10_eu_shp.zip") #unzip, need once only
   # filenames <- list.files("HydroRIVERS_v10_eu_shp", pattern="*.shp", full.names=T)
-  unzip("HydroRIVERS_v10_au_shp.zip") #unzip, need once only
+  #unzip("HydroRIVERS_v10_au_shp.zip") #unzip, need once only
   filenames <- list.files("HydroRIVERS_v10_au_shp", pattern="*.shp", full.names=T)
   return(filenames)
 }
 
-# getwd()
-# here()
+tic("get_data")
 get_data()
+toc()
+# 3.5 seconds
 
 # 2. CREATE RIVER WIDTH
 #---------
@@ -83,7 +85,10 @@ get_data()
 
   }
 
- get_rivers()
+tic("get_rivers")
+get_rivers()
+toc()
+# takes 5 minutes
 
 # 3. MAKE BOUNDING BOX
 #---------
@@ -109,14 +114,25 @@ get_bounding_box <- function(crsLONGLAT, bbox, new_prj, bb) {
   return(bb)
 }
 
- get_bounding_box()
- 
+tic("get_bounding_box")
+get_bounding_box()
+toc()
+# ~0 seconds
+
 # 4. MAP
 #---------
 
 #map_url <- "https://raw.githubusercontent.com/milos-agathon/map-rivers-with-sf-and-ggplot2-in-R/main/R/make_map.r"
 #source(map_url) # load script
 source("R/make_map.r")
-p1 <- get_river_map()
-ggsave(filename="european_rivers_new.png", width=7, height=8.5, dpi = 600, device='png', p1)
 
+tic("get_river_map makes the plot")
+p1 <- get_river_map()
+toc()
+# ~5 min
+
+tic("save plot")
+#ggsave(filename="european_rivers_new.png", width=7, height=8.5, dpi = 600, device='png', p1)
+ggsave(filename="australasian_rivers_new.png", width=7, height=8.5, dpi = 600, device='png', p1)
+toc()
+# ~2.5 minutes
