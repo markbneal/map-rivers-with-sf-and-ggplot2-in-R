@@ -11,7 +11,8 @@ get_river_map <- function(au_riv, bbox, p) {
       ylim = c(bbox["ymin"], bbox["ymax"])) +
     labs(y="", subtitle="",
          x = "",
-         title="Rivers of Australasia",
+         #title="Rivers of Australasia",
+         title="Rivers of New Zealand",
          caption="Code from Miles Popovic, modified by Mark Neal\n HydroSHEDS database http://www.hydrosheds.org") +
     scale_color_manual(
         name = "",
