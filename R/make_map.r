@@ -1,11 +1,11 @@
-get_river_map <- function(eu_riv, bbox, p) {
+get_river_map <- function(au_riv, bbox, p) {
 
-  eu_riv <- get_rivers()
+  au_riv <- get_rivers()
   bbox <- get_bounding_box()
 
   p <- 
     ggplot() +
-    geom_sf(data=eu_riv, aes(color=factor(ORD_FLOW), size=width)) +
+    geom_sf(data=au_riv, aes(color=factor(ORD_FLOW), size=width)) +
     coord_sf(crs = 4087,
       xlim = c(bbox["xmin"], bbox["xmax"]), 
       ylim = c(bbox["ymin"], bbox["ymax"])) +
