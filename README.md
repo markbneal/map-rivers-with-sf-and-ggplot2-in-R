@@ -10,4 +10,4 @@ https://milospopovic.net/map-rivers-with-sf-and-ggplot2-in-r/
 
 Edited by Mark Neal for Australasian rivers, plus some tweaks for running more generally.
 
-![Australasian rivers]()
+![Australasian rivers](https://github.com/markbneal/map-rivers-with-sf-and-ggplot2-in-R/blob/main/australasian_rivers_new.png)
