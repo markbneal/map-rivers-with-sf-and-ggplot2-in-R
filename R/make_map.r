@@ -11,15 +11,15 @@ get_river_map <- function(au_riv, bbox, p) {
       ylim = c(bbox["ymin"], bbox["ymax"])) +
     labs(y="", subtitle="",
          x = "",
-         title="Rivers of Europe",
-         caption="©2022 Milos Popovic https://milospopovic.net\nSource: ©World Wildlife Fund, Inc. (2006-2013)\n HydroSHEDS database http://www.hydrosheds.org") +
+         title="Rivers of Australasia",
+         caption="Code from Miles Popovic, modified by Mark Neal\n HydroSHEDS database http://www.hydrosheds.org") +
     scale_color_manual(
         name = "",
         values = c('#08306b', '#08519c', '#2171b5', '#4292c6', '#6baed6', '#9ecae1', '#c6dbef', '#deebf7')) +
     scale_size(range=c(0, .3)) +
     scale_alpha_manual(values=c("3" = 1, "4" = 1, "5" = .7, "6" = .6, "7" = .4, "8" = .3, "9" = .2, "10" = .1)) +
     theme_minimal() +
-    theme(text = element_text(family = "georg"),
+    theme(#text = element_text(family = "georg"),
       panel.background = element_blank(), 
       legend.background = element_blank(),
       legend.position = "none",

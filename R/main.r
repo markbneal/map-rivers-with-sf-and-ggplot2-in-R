@@ -6,7 +6,7 @@
 # HACKING to do for Aus rivers ####-------------------------------------------------------
 
 ################################################################################
-windowsFonts(georg = windowsFont('Georgia'))
+#windowsFonts(georg = windowsFont('Georgia'))
 
 # libraries we need
 libs <- c("httr", "tidyverse", "sf")
@@ -36,14 +36,23 @@ library(here)
 #   return(filenames)
 # }
 
+# Download manually from https://www.hydrosheds.org/products/hydrorivers HydroRIVERS_v10_eu_shp.zip
+# or use wget in terminal for eurpoe
+# wget https://data.hydrosheds.org/file/HydroRIVERS/HydroRIVERS_v10_eu_shp.zip
+# or for aus
+# wget https://data.hydrosheds.org/file/HydroRIVERS/HydroRIVERS_v10_au_shp.zip
+
 get_data <- function(url, res, filenames) {
-  filenames <- list.files(path = paste0(here(), "/HydroRIVERS_v10_au_shp"), pattern="\\.shp", full.names=TRUE) #!!
+  # unzip("HydroRIVERS_v10_eu_shp.zip") #unzip, need once only
+  # filenames <- list.files("HydroRIVERS_v10_eu_shp", pattern="*.shp", full.names=T)
+  unzip("HydroRIVERS_v10_au_shp.zip") #unzip, need once only
+  filenames <- list.files("HydroRIVERS_v10_au_shp", pattern="*.shp", full.names=T)
   return(filenames)
 }
 
 # getwd()
 # here()
-# get_data()
+get_data()
 
 # 2. CREATE RIVER WIDTH
 #---------
@@ -74,7 +83,7 @@ get_data <- function(url, res, filenames) {
 
   }
 
-# get_rivers()
+ get_rivers()
 
 # 3. MAKE BOUNDING BOX
 #---------
@@ -87,8 +96,8 @@ get_bounding_box <- function(crsLONGLAT, bbox, new_prj, bb) {
   st_polygon(list(cbind(
     # c(-10.5, 48.5, 48.5, -10.5, -10.5), # x-coordinates (longitudes) of points A,B,C,D        #EU
     # c(35.000, 35.000, 69.5, 69.5, 35.000)     # y-coordinates (latitudes) of points A,B,C,D   #EU
-    c(90, 178, 178, 90, 90), # x-coordinates (longitudes) of points A,B,C,D
-    c(-46, -46, 20, 20, -46)     # y-coordinates (latitudes) of points A,B,C,D
+    c(95, 179.999, 179.999, 95, 95), # x-coordinates (longitudes) of points A,B,C,D
+    c(-55, -55, 21, 21, -55)     # y-coordinates (latitudes) of points A,B,C,D
     
     
     ))),
@@ -100,6 +109,8 @@ get_bounding_box <- function(crsLONGLAT, bbox, new_prj, bb) {
   return(bb)
 }
 
+ get_bounding_box()
+ 
 # 4. MAP
 #---------
 
